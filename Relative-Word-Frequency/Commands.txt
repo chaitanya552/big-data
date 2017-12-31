@@ -1,0 +1,62 @@
+
+Commands : 
+
+1)Pseudo Distributed Mode :
+
+
+* Format The NameNode:
+/bin/Hadoop namenode -format
+
+* begin the Hadoop Services:
+/sbin/start-all.sh
+
+* Now keep the Text File and jar in a folder on the HDFS:
+hadoop fs -mkdir /home/ec2-user/PseudoMode
+hadoop fs -put 100KWikiText.txt /home/ ec2-user/PseudoMode
+hadoop fs -put rf.jar /home/ ec2-user/PseudoMode
+
+* Execute the jar file:
+ [ec2-user@ip-172-31-33-227 PseudoMode]$ /home/ec2-user/hadoop-2.7.3/bin/hadoop jar rf.jar RelFrequency input output
+
+* To  View the output
+hadoop fs -cat /home/ec2-user/PseudoMode/output /top100.txt
+
+
+
+2)Fully Distributed Mode
+
+
+* Create Another  EC2 instance (Slave) on AWS and install hadoop on all the nodes
+tar -xzvf hadoop-3.0.0-alpha2.tar.gz
+
+* Configure the hadoop/etc/hadoop/core-site.xml:
+<configuration>
+<property>
+<name>fs.defaultFS</name> <value>hdfs://master:8020/</value>
+</property>
+<property>
+<name>hadoop.temp.dir</name>
+<value>$HOME/hdfs</value>
+</property>
+</configuration>
+
+* Configure the hadoop/etc/hadoop/hdfs-site.xml:
+change the value based on number of nodes
+<configuration>
+<property>
+<name>dfs.replication</name> <value>3</value>
+</property>
+<property>
+<name>dfs.permissions</name>
+<value>false</value>
+</property> </configuration>
+
+* Configure the hadoop/etc/hadoop/mapred-site.xml:
+<configuration>
+<property>
+<name>mapred.job.tracker</name>
+<value>hdfs://master:8021</value>
+</property>
+</configuration>
+
+* Now repeat the steps for Pseudo Distributed Mode

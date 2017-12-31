@@ -1,0 +1,25 @@
+
+* Input - Output Format Used
+
+ - Mapper
+ Input :
+ LongWritable, Text
+
+ Output : 
+ Text, LongWritable
+
+ - Reducer
+  Input :
+  Text, Longritable
+  Output :
+  Text, Text
+
+*  Cluster Settings
+
+Number of VM Instances = 3 (Linux)
+Number of Mappers = 1
+Number of Reducers = 1
+
+* 
+Running time in Pseudo Distributed Mode is 115 seconds.
+Running time in Fully Distributed Mode is 99 seconds.

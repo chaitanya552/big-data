@@ -1,0 +1,32 @@
+
+My Algorithm:
+
+
+Input file: 100KWikiText.txt 
+
+Output: Top 100 Wordpairs with their relative frequency.
+
+Steps:
+
+*Create a mapper and reducer
+*Mapper will form keys and values of single words(word1 #, 1)
+*Mapper will form keys and values of paired words(word1 word2, 1) 
+
+
+*In reducer,  we check if the key is a single word or word pair. 
+1#
+-If it’s a single word then I will examine if the key is equal to current word(which is initially set to B-L-A-N-K) and then count the total number of occurrences	
+-If not, then I will set it as current word and I am counting the occurrences of this word.
+
+
+	
+2#
+-If it’s a word pair then I am counting the total occurrences and finding out the relative frequencies. 
+I am Inserting these into the tree relative frequency, word Pair and first word.
+The elements in the tree set are arranged in decreasing order of Relative Frequency. Now I'm trimming the when it reaches more than 100.
+Now I will have Top 100 word pairs with relative frequencies. 
+
+
+
+3#
+Now I am printing the output to a file. 
